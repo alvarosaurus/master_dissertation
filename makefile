@@ -1,8 +1,8 @@
-.PHONY: all clean 
+.PHONY: all prepare clean 
 default: all
 
 # the name of the article file (without extension)
-ARTICLE = v2-acmsmall-sample
+ARTICLE = master
 
 all: prepare
 	cd temp && \
@@ -16,14 +16,12 @@ all: prepare
 # copy all files required by latex to the temp dir
 prepare: 
 	mkdir -p temp
-	cp templates/ACM-Reference-Format-Journals.bst temp
-	cp templates/acmsmall.cls temp
-	cp templates/acmsmall-mouse.eps temp
-	cp docs/$(ARTICLE).tex temp
-	cp docs/$(ARTICLE).bib temp
+	cp -r templates/* temp
+	cp -r docs/* temp
+	cp -r figures temp
 
 # cleanup output and temp files
 clean:
 	rm -f docs/$(ARTICLE).pdf
-	rm -f temp/*
+	rm -fr temp/*
 
