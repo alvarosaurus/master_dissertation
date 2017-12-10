@@ -5,7 +5,7 @@ The dissertation was accepted by the Open University UK on 28 November 2017.
 
 ## Template
 The LaTeX template was downloaded from:
-http://www.LaTeXTemplates.com
+https://www.latextemplates.com/template/masters-doctoral-thesis
 
 Version 2.x major modifications by:
 Vel (vel@latextemplates.com)
