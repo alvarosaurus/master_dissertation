@@ -6,10 +6,10 @@ ARTICLE = master
 
 all: prepare
 	cd temp && \
-	pdflatex $(ARTICLE) && \
-	bibtex $(ARTICLE) && \
-	pdflatex $(ARTICLE) && \
-	pdflatex $(ARTICLE)
+	pdflatex $(ARTICLE).tex && \
+#	bibtex $(ARTICLE) && \
+#	pdflatex $(ARTICLE) && \
+	pdflatex $(ARTICLE).tex
 	mv -f temp/$(ARTICLE).pdf docs
 	echo created docs/$(ARTICLE).pdf 
 

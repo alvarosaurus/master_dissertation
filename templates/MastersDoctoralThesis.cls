@@ -363,8 +363,8 @@ KOMA-script documentation for details.}]{fancyhdr}
 			\bigskip
 			{\huge\textit{\abstractname} \par}
 			\bigskip
-			{\normalsize \facname \par}% Faculty name
-			{\normalsize \deptname \par}% Department name
+			%{\normalsize \facname \par}% Faculty name
+			%{\normalsize \deptname \par}% Department name
 			\bigskip
 			{\normalsize \degreename\par}% Degree name
 			\bigskip
@@ -493,6 +493,22 @@ KOMA-script documentation for details.}]{fancyhdr}
 	}{%
 	\end{longtable}
 	\addtocounter{table}{-1}% Don't count this table as one of the document tables
+	\ifbool{nolistspace}{\endgroup}{}
+}
+
+%----------------------------------------------------------------------------------------
+%	GLOSSARY PAGE DESIGN
+%----------------------------------------------------------------------------------------
+\newcommand{\defname}{definitions}
+\providecaptionname{english,british,american}{\defname}{Glossary}
+\providecaptionname{ngerman,german,austrian,naustrian}{\defname}{Glossar}
+
+\NewDocumentEnvironment{definitions}{ m }{%
+	\ifbool{nolistspace}{\begingroup\singlespacing}{}
+	\ifbool{listtoc}{\addchap{\defname}}{\addchap*{\defname}}
+        \begin{description}
+	}{%
+        \end{description}
 	\ifbool{nolistspace}{\endgroup}{}
 }
 
