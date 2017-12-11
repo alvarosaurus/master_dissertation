@@ -1,0 +1,56 @@
+% Chapter 5
+
+\chapter{Conclusions} % Main chapter title
+
+\label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+%----------------------------------------------------------------------------------------
+
+\section{Conclusions about the objectives}
+\subsection{Validity of the term “evolution” in the context of computer science}
+The term “software evolution” has been used in computer science literature since the 1980s. However, as noted by several authors, the correspondence between biological and software evolution cannot be taken for granted. According to certain authors, “software evolution” is a metaphor at best, in any case, a discussion of software evolution should be grounded on a solid set of definitions: what entities are being studied, which measurement characters are suitable and which phylogenetic methods are applicable.
+
+\subsection{Importance of forks}
+The case studies selected substantiate that forking affects well-known projects with a large user base, and teams of more than thousand developers. Major software companies have used forking as a business strategy, leading to successful and failed projects. Therefore it is likely that forking has an impact on the software ecosystem, and its importance should not be underestimated.
+
+\subsection{Applicability of phylogenetic trees to the study of software development}
+As methods for estimating phylogenetic trees are quantifiable and repeatable, these methods provide a way to gain an objective understanding of the state of a fork. However, the research failed to provide a way to estimate the likely outcome of a fork. Nevertheless, the techniques used, matrices and trees, could be used by practitioners to gain an overview of the state of complex open source software development projects.
+
+\section{Conclusions about the research aim}
+\subsection{Choice of methods}
+Methods from evolutionary biology were applied to answer the research questions. These methods purport to be repeatable and objective, two desirable qualities for any scientific method. In order to transfer these methods from biology to computer science while keeping these qualities intact, the correspondence between biological and software entities had to be made explicit: evolution is a process that affects a population of self-reproducing entities, and happens independently from the decisions taken by individual managers. The choice of methods was restricted by the fact that no unequivocal equivalent to biological genes could be found in the software domain: methods from evolutionary biology which are applicable to quantified characters of various kinds (“distance matrix” methods) were favoured, while methods limited to the examination of gene sequences had to be discarded.
+
+\subsection{Vocabulary}
+The chosen methods delivered a statistically significant result for the first research question, thus supporting the idea that, within the constraints defined above, these methods can be applied to software forks in particular and software development in general. A corollary of this is that terms used to describe biological evolution can be used to describe software evolution, thus the vocabulary of software development can be enriched. An attempt was made at redefining the following terms in the context of software development: clade, relatedness, convergent evolution and parsimony.
+
+\subsection{Importance of additional factors}
+Failing to obtain a positive result for the second research question shows that intrinsic characteristics of the code base and of the developer team are not sufficient to predict the outcome of a fork, therefore the outcome of a fork might be influenced to a great extent by other factors: the managerial, economic and social context of the project comes to mind.
+
+\section{Further work}
+Further work could be accomplished in several thematic areas:
+
+\begin{description}
+\dt{Socio-technical context}
+\dd{As noted in the conclusions, this research suggests that additional factors, managerial, economic, social or otherwise, have an influence on the outcome of a fork. Finding a connection between the outcomes of forks and such factors could provide evidence as to the importance of these factors in a wider context within computer science.}
+
+\dt{Validation and calibration}
+\dd{This research found that forks can be distinguished from branches within the three projects analysed. It should be possible to repeat this analysis using additional examples to validate this result.}
+
+\dt{Empirical studies of forks}
+\dd{Any case-study of forked projects could potentially benefit from applying phylogenetic methods to visualize and quantify the forking process.}
+\end{description}
+
+\section{Implications of the research}
+Best practices in software development recommend using a repository for keeping track of releases and versions of software. For example, the popular Github online service (http://github.org) provides free online repositories for open source projects, and the Gitlab project (http://gitlab.com) provides open source software intended for setting up a development environment for open source or commercial software development. 
+
+However, tools for visualizing the state of branches, releases and forks are limited in scope. Practical implications of this research could be: (1) representing the history of a project using phylogenetic trees, which provide an easy to grasp overview of the state of development of a project. (2) Constructing a shaded distance matrix, which encodes pairwise dissimilarity of releases within a project using a colour scale: the lighter the shade, the greater the dissimilarity (an example shaded matrix is given in table 3.4). Based on the results for obtained for research question 1, a shaded distance matrix would be a suitable technique for detecting potential fork candidates. 
+
+Such an implementation would have to overcome a number of technical difficulties, among which the prohibitively long computation time required for estimating a phylogenetic tree of a real-life project using the methods explored in this research is probably the most difficult to surmount. Computation time could be reduced by implementing the software in a compiled computer language, using a non-relational database to store the data and optimizing the algorithms used for calculating the distance matrix and for estimating the tree.
+
+\section{Reflection on the experience of the research process}
+
+\subsection{The choice of problem}
+The primary aim of scientific research is to discover new knowledge, and the choice of a scientific problem is essential in achieving this aim: a good problem can be described in terms of feasibility and interest (Alon, 2009). The chosen problem in this research was tackled by attempting to answer two research questions. The methods used to answer these questions are well-documented in literature and were implemented using existing software libraries, therefore the problem was relatively easy to solve. As the problem has a limited scope (forks of open source software), the increase in knowledge expected from answering these questions was also rather small. Therefore the chosen problem is of the easy and moderately interesting kind. A better problem would not be necessarily more difficult, but more interesting: for example expanding the scope of the research to applying phylogenetic techniques to the study of the governance of open source projects, instead of merely of forks, could potentially have yielded more interesting results.
+
+\subsection{Transdisciplinarity}
+A different way to increase the interest of the problem would be to look at the research as a study case in transdisciplinarity, i.e. porting methods from one scientific field (biology) into another (computer science). Some of the literature reviewed for this research is relatively old, e.g. Sokal (1962), yet seems to be still relevant to computer science. This suggests that methods from one scientific field can have a second life in another field; therefore the lifecycle of scientific methods could be expanded. Such a research would however be beyond the limits of the qualification sought here.

@@ -11,11 +11,11 @@ In the following sections the term “technique” is used for any procedure tha
 
 As illustrated in figure 1.1, and further elaborated in the working definition of “software evolution” in paragraph 1.3, the methods and techniques chosen are applied to a population of software releases. Therefore, the basic entity under scrutiny, the “operational taxonomic unit” (Sokal, 1983), is the “software release”.
 
-\section{Data acquisition and encoding techniques}
+\subsection{Data acquisition and encoding techniques}
 
 The choice of techniques for data acquisition is based, with alterations, on the overview of software metrics provided by Nagappan et al. (2008) reviewed in paragraph 2.2.1. Nagappan et al. (2008) distinguish between code structure characteristics and organizational characteristics. The following characteristics were used to describe software releases.
 
-\subsection{Code structure characteristics}
+\subsubsection{Code structure characteristics}
 For the present research, it was assumed that for the study of software evolution, the most relevant code structure characteristic is a measure of code churn, redefined as the amount of change introduced by each release.
 
 \noindent
@@ -25,7 +25,7 @@ Code churn was recorded by 2 measurements:
 \item{a checksum of each file indicating file changes across releases.}
 \end{itemize}
 
-\subsection{Organizational characteristics}
+\subsubsection{Organizational characteristics}
 Software source code is generally developed and stored in a code repository. Code repositories record who edited each file and who committed the change in the repository, thus providing information about the structure of the development team involved in each software release. Team structure characteristics were recorded in three measurements:
 
 \begin{itemize}
@@ -58,6 +58,8 @@ The cophenetic distance is the distance at which two tips of a tree combine into
 
 \dt{As input for further analysis} \dd{As the cophenetic distance matrix represents the tree, it can be used as input for statistical analysis. Cophenetic matrices were used to answer the research questions, as detailed in the following paragraph.}
 \end{description}
+
+% ----------------------------------------------------------------------------------------
 
 \section{Justification}
 The practical problem (2.1) was tackled through two research questions. These research questions were answered by reformulating them as statistical hypotheses based on the trees obtained by applying the methods and techniques selected. Cophenetic distance matrices (3.1.4) were instrumental in defining these statistical hypotheses, as cophenetic distance matrices represent the trees in a way that can be used as input for statistical analysis.
@@ -92,22 +94,23 @@ These hypotheses can be translated into statistical hypotheses by calculating th
 
 \definition{Alternative statistical hypothesis}{The alternative statistical hypothesis is that the mean distance between forks with different outcomes are significantly heterogeneous with regard to the outcome of the fork.}
 
-\subsection{Research procedures}
+%----------------------------------------------------------------------------------------
+\section{Research procedures}
 The research questions are examined by applying the activities detailed in figure 3.1.
 
-\subsubsection{Data acquisition and re-encoding}
+\subsection{Data acquisition and re-encoding}
 Data was acquired from selected open source repositories. The choice of software projects to study was guided by the comprehensive review of forks provided by Robles and González-Barahona (2012). Forks are per definition only possible in an open source context, therefore any conclusions apply in this context only. Additionally, the choice of projects was limited by the availability of a complete release history of the project, at least as far back as the moment in time were the fork happened.
 
 As forking is a process at the crossroads between technical evolution and organizational evolution (as per the definition in paragraph 1.3), the data acquisition techniques were chosen to cover technical and organizational aspects of projects.
 
 Data has to be re-encoded in order to be processable. This process is explained in detail in paragraph 4.1.2. Guidelines for re-encoding characters can be found in Sokal (1983).
 
-\subsubsection{Distance matrices}
+\subsection{Distance matrices}
 As explained in paragraph 3.1.2, the chosen methods for answering the research questions are all part of the “distance matrix” family of phylogenetic methods. As shown in figure 3.1, a matrix of the pairwise dissimilarity between the releases of the chosen fork has to be computed. Several techniques are available to compute a distance matrix: computing Euclidean, or “Manhattan” distances are commonly used (Felsenstein, 1982). However, these techniques are limited to processing numerical and Boolean data respectively. As the acquired data is of various data types (Boolean, categorical, numerical, see table 3.1) the chosen method is required to process different data types. Only the “Gower” technique (D'Orazio, 2016) satisfies this requirement. However, the Gower technique is limited in that matrix rows with missing values do not contribute to the result, therefore, part of the data acquired was discarded before processing.
 
 Table 3.2 shows an example distance matrix, constructed by subsampling the data collected for the Mysql / MariaDB fork (see 4.1 for details). Ten branches and thousand measurement characters were selected at random (the original data set has 107 branches and 56 648 measurement characters).
 
-\subsubsection{Phylogenetic trees and cophenetic distances}
+\subsection{Phylogenetic trees and cophenetic distances}
 The proposed methods for answering the research questions involve constructing phylogenetic trees by applying the methods described in 3.1.3.
 
 Figure 3.2 shows an example tree constructed using the subsample of the data presented in table 3.2. The Neighbour-Joining algorithm (Saitou and Nei, 1987) was used to estimate the tree.
@@ -118,7 +121,7 @@ Table 3.3 shows an example cophenetic matrix. Please note that the cophenetic ma
 
 The distance matrix can be shaded to show the degree of dissimilarity between releases, and the matrix can then be rearranged into clusters of the same shade. This representation was introduced by Sokal (1962) and used to discover species and genus in the data. Table 3.4 shows that in the example data, MySQL releases are close to each other, while MySQL 5.7.12 and all releases of MariaDB are the most distant from each other (light-shaded cells in the bottom row).
 
-\subsubsection{Analysis of variance}
+\subsection{Analysis of variance}
 As detailed in 3.2.1, answering RQ1 requires computing a matrix of the cophenetic distances between releases and estimating if these distances correlate to forks and branches. Figure 3.3 shows a box plot of the cophenetic distances in the example data. The plot shows that distances between tips inside either project (“Branches”) are statistically smaller than the distances between tips on different forks (“Forks”).
 
 According to McDonald (2014), choosing a method for statistical analysis is primarily guided by the kind and number of variables required to test the hypothesis. The cophenetic distance is a measurement variable, and whether the pairwise distance between releases corresponds to a “fork” or “branch” is a nominal variable. McDonald (2014) lists two methods for testing a hypothesis based on one measurement and one nominal variable: “student's t-test” and “analysis of variance” (ANOVA).
@@ -127,14 +130,15 @@ The method proposed for answering RQ2 (paragraph 3.2.2) requires examining proje
 
 Consequently, RQ1 and RQ2 can be answered by applying analysis of variance (ANOVA), albeit with different number of nominal variables. ANOVA assumes that the data is normally distributed (fits the Gaussian “bell curve”) and that that the standard deviation is the same for the data sets examined, otherwise false positives may result (McDonald, 2014. p. 147). As the raw data obtained from the repositories did not meet these assumptions, the data had to be transformed to fit the assumptions prior to the analysis.
 
-\subsection{Ethical considerations}
+%----------------------------------------------------------------------------------------
+\section{Ethical considerations}
 All data analysed for this research is freely available under an open source license, therefore no intellectual property rights were disregarded during the acquisition of the data. 
 
 Some of the forks studied were a consequence of disagreements between development teams. Care was applied during the analysis not to take sides for any particular team; however, to thwart any bias ensuing from the reputation of well-known actors in the industry, all names of developers were anonymized prior to being stored locally.
 
 Although I do participate in open source software development, I am not involved in any of the projects examined for this research.
-
-\subsection{Summary of Chapter 3}
+%----------------------------------------------------------------------------------------
+\section{Summary of Chapter 3}
 Character measurement techniques applicable to software code bases and to software producing organizations were selected from literature. Suitable techniques to study the evolution of software were chosen from the corpus of biological techniques for estimating phylogenetic trees. The two research questions were specified in terms of hypotheses, null hypotheses and their corresponding statistical hypotheses. The steps required by the research were worked out and each step was illustrated with an example drawn from a subset of the data. Finally, analysis techniques suitable to answer the research questions were selected, based on the type and number of independent variables required by the analysis.
 
 
