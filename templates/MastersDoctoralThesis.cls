@@ -556,9 +556,12 @@ breaklinks=true,
 
 %----------------------------------------------------------------------------------------
 
+% definition
+\newcommand{\definition}[2]{{\begin{description}\item{\textbf{#1}}\hfill\\ \textit{#2} \end{description}}}
+
+% indented list
 \newcommand{\dt}[1]{\item{\textbf{#1}}\hfill}
 \newcommand{\dd}[1]{\\{#1}}
-
 
 \endinput
 % lazyLizardTracer
