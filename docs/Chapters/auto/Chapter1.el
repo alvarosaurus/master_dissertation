@@ -7,11 +7,6 @@
     '("code" 1)
     '("tabhead" 1)
     '("keyword" 1))
-   (LaTeX-add-labels
-    "FillingFile"
-    "ThesisConventions"
-    "tab:treatments"
-    "fig:Electron"
-    "eqn:Einstein"))
+   (LaTeX-add-labels))
  :latex)
 
