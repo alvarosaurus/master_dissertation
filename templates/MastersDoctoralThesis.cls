@@ -559,7 +559,7 @@ breaklinks=true,
 % definition
 \newcommand{\definition}[2]{{\begin{description}\item{\textbf{#1}}\hfill\\ \textit{#2} \end{description}}}
 
-% indented list, use between itemize
+% indented list, use between "description"
 \newcommand{\dt}[1]{\item{\textbf{#1}}\hfill}
 \newcommand{\dd}[1]{\\{#1}}
 
