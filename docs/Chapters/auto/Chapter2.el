@@ -1,5 +1,5 @@
 (TeX-add-style-hook
- "Chapter1"
+ "Chapter2"
  (lambda ()
    (LaTeX-add-labels))
  :latex)
