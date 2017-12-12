@@ -7,8 +7,8 @@ ARTICLE = master
 all: prepare
 	cd temp && \
 	pdflatex $(ARTICLE).tex && \
-#	bibtex $(ARTICLE) && \
-#	pdflatex $(ARTICLE) && \
+	bibtex $(ARTICLE) && \
+	pdflatex $(ARTICLE) && \
 	pdflatex $(ARTICLE).tex
 	mv -f temp/$(ARTICLE).pdf docs
 	echo created docs/$(ARTICLE).pdf 
@@ -18,6 +18,7 @@ prepare:
 	mkdir -p temp
 	cp -r templates/* temp
 	cp -r docs/* temp
+	mv temp/Chapters/Chapter*.tex temp
 	cp -r figures temp
 
 # cleanup output and temp files
