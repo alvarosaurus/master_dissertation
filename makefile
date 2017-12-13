@@ -18,7 +18,7 @@ prepare:
 	mkdir -p temp
 	cp -r templates/* temp
 	cp -r docs/* temp
-	mv temp/Chapters/Chapter*.tex temp
+	mv temp/Chapters/*.tex temp
 	cp -r figures temp
 
 # cleanup output and temp files
