@@ -7,17 +7,17 @@
 %----------------------------------------------------------------------------------------
 
 \section{Summary of data collected}
-In order to answer the research questions (2.1), three cases of forks with different outcomes were selected. Forking reasons and outcomes are characterized here using the terminology introduced by Robles and González-Barahona (2012).
+In order to answer the research questions (2.1), three cases of forks with different outcomes were selected. Forking reasons and outcomes are characterized here using the terminology introduced by \citet{Robles2012a}.
 
 \begin{description}
 \dt{MySQL server / MariaDB server}
-\dd{The open source database server MySQL was purchased by Sun Inc. in 2008, resulting in the departure of the original chief engineer (on good terms) to form his own company, MariaDB (Widenius, 2009). Subsequently, Sun was acquired by Oracle. Oracle’s attempt to highjack the project (Nyman and Lindman, 2013) led to a full-fledged fork in 2012 (Widenius, 2012).}
+\dd{The open source database server MySQL was purchased by Sun Inc. in 2008, resulting in the departure of the original chief engineer (on good terms) to form his own company, MariaDB \citep{Widenius2009}. Subsequently, Sun was acquired by Oracle. Oracle’s attempt to highjack the project \citep{Nyman2013a} led to a full-fledged fork in 2012 \citep{Widenius2012}.}
 
 \dt{Linux kernel / Android kernel}
-\dd{In 2005, Google Inc. bought Android, then a start-up developing a Linux-based operating system for cellular phones, in order to expand its search service to the mobile market (Elgin, 2005). The Linux community and Google have been cooperating on the core system, while Google continues to develop device-specific extensions to the core under a shared open source licensing regime (Vaughan-Nichols, 2011).}
+\dd{In 2005, Google Inc. bought Android, then a start-up developing a Linux-based operating system for cellular phones, in order to expand its search service to the mobile market \citep{Elgin2005}. The Linux community and Google have been cooperating on the core system, while Google continues to develop device-specific extensions to the core under a shared open source licensing regime \citep{Vaughan-Nichols2011}.}
 
 \dt{Apache OpenOffice / LibreOffice}
-\dd{Development of the OpenOffice suite of office applications began in 2000, in a company owned by Sun Microsystems; following the acquisition of Sun by Oracle, OpenOffice was forked into LibreOffice by its developers in 2010; as OpenOffice lost momentum, Oracle donated the project to the Apache foundation in 2011 (Gamalielsson and Lundell, 2014).}
+\dd{Development of the OpenOffice suite of office applications began in 2000, in a company owned by Sun Microsystems; following the acquisition of Sun by Oracle, OpenOffice was forked into LibreOffice by its developers in 2010; as OpenOffice lost momentum, Oracle donated the project to the Apache foundation in 2011 \citep{Gamalielsson2014b}.}
 \end{description}
 
 \subsection{Data acquisition}
@@ -43,20 +43,20 @@ Binary characters, e.g. presence/absence of a file in a branch, were encoded as 
 The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table 4.5).
 
 \subsection{Applying phylogenetic methods}
-Distance matrices were computed and phylogenetic trees were estimated for each fork case studied. The software was written using the R language for statistical computing (R Core Team, 2017). The classes implemented are wrappers for the R functions provided by packages for general and biological statistics. 
+Distance matrices were computed and phylogenetic trees were estimated for each fork case studied. The software was written using the R language for statistical computing \citep{RDevelopmentCoreTeam2008a}. The classes implemented are wrappers for the R functions provided by packages for general and biological statistics. 
 
 The software implemented for the research is documented in the class diagram in Appendix 2.
 
 \begin{itemize}
-\item{Distance matrices were calculated using the function “gower” provided by the R-package “StatMatch” (D'Orazio, 2016).}
+\item{Distance matrices were calculated using the function “gower” provided by the R-package “StatMatch” \citep{DOrazio2016}.}
 
-\item{The UPGMA technique for computing taxonomic trees (3.1.3) was implemented using the function ”hclust” with the agglomeration method “UPGMA” provided by the R-package “Stats” (R Core Team, 2017, p. 1355).}
+\item{The UPGMA technique for computing taxonomic trees (3.1.3) was implemented using the function ”hclust” with the agglomeration method “UPGMA” provided by the R-package “Stats” \citep[p.1355]{RDevelopmentCoreTeam2008a}.}
 
-\item{The Neighbour-Joining and Minimum Evolution techniques (3.1.3) were implemented using the functions “nj” and “fastme.bal” provided by the R-package “Ape” (Paradis et al., 2004).}
+\item{The Neighbour-Joining and Minimum Evolution techniques (3.1.3) were implemented using the functions “nj” and “fastme.bal” provided by the R-package “Ape” \citep{Paradis2004a}.}
 \end{itemize}
 
 \subsection{Cophenetic distances}
-Answering the research questions involves calculating a cophenetic distance matrix for each tree. Cophenetic distances were calculated using the function “cophenetic” provided by the R-package “Stats” (R Core Team, 2017, p. 1275).
+Answering the research questions involves calculating a cophenetic distance matrix for each tree. Cophenetic distances were calculated using the function “cophenetic” provided by the R-package “Stats” \citep[p.1275]{RDevelopmentCoreTeam2008a}.
 
 %----------------------------------------------------------------------------------------
 
@@ -66,21 +66,21 @@ Answering the research questions involves calculating a cophenetic distance matr
 Answering RQ1 (see paragraph 2.1) requires calculating the distance between software releases and estimating if these distances correlate to forks and branches. The expected outcome is that forks will always differ more than branches, independently of the outcome of the project.
 
 \subsubsection{Choice of statistical method for analysis}
-Whether a pair of releases represents a fork or a branch is a nominal variable with two possible values (“fork” or “branch”) and the pairwise cophenetic distance between releases is a measurement variable. A suitable test for these types of variables is a one-way analysis of variance (ANOVA) with two categories (McDonald, 2014). The result should be repeatable for each case described in 4.1. The R-package “Stats” provides methods for computing variance (R Core Team, 2017, p. 1211). 
+Whether a pair of releases represents a fork or a branch is a nominal variable with two possible values (“fork” or “branch”) and the pairwise cophenetic distance between releases is a measurement variable. A suitable test for these types of variables is a one-way analysis of variance (ANOVA) with two categories \citep{McDonald2014b}. The result should be repeatable for each case described in 4.1. The R-package “Stats” provides methods for computing variance \citep[p.1211]{RDevelopmentCoreTeam2008a}.
 
 \subsubsection{Checking assumptions for RQ1}
 
 \definition{Assumption 1: Accuracy}{Methods for computing trees from distance matrices are assumed to produce trees that represent the distance matrix accurately.}
 
 \noindent
-The three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix (Rohlf, 2013). Correlations (Pearson's Chi-squared test) were calculated for each fork (table 4.6). The Neighbour-Joining method was found to produce the best correlation for the 3 data sets considered (correlation > 0.991086), UPGMA is second (correlation > 0.823779) and ME is the most inaccurate method (correlation > 0.512404).
+The three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix \citep{Rohlf2013a}. Correlations (Pearson's Chi-squared test) were calculated for each fork (table 4.6). The Neighbour-Joining method was found to produce the best correlation for the 3 data sets considered (correlation > 0.991086), UPGMA is second (correlation > 0.823779) and ME is the most inaccurate method (correlation > 0.512404).
 
-\definition{Assumption 2: Normality}{ANOVA assumes that the data is normally distributed (fits the Gaussian “bell curve”) and that the standard deviation is the same for the data sets examined. Performing an ANOVA on data sets that are not normally distributed increases the chance of false positives (McDonald, 2014. p. 147).}
+\definition{Assumption 2: Normality}{ANOVA assumes that the data is normally distributed (fits the Gaussian “bell curve”) and that the standard deviation is the same for the data sets examined. Performing an ANOVA on data sets that are not normally distributed increases the chance of false positives \citep[p.147]{McDonald2014b}.}
 
 \noindent
-As can be seen in figure 4.1, the data is not normally distributed. An accepted remedy for this situation is to transform the data to make it fit the assumption of normality better: common transformations are to apply logarithm or square root transformations to the data (McDonald, 2014. p. 141). The histograms (4.1) show that the distribution of the square root of distances (in figure 4.1, bottom row) better fits the normal distribution.
+As can be seen in figure 4.1, the data is not normally distributed. An accepted remedy for this situation is to transform the data to make it fit the assumption of normality better: common transformations are to apply logarithm or square root transformations to the data \citep[p.141]{McDonald2014b}. The histograms (4.1) show that the distribution of the square root of distances (in figure 4.1, bottom row) better fits the normal distribution.
 
-\definition{Assumption 3: Homoscedasticity}{ANOVA assumes that the standard deviation of the data is the same for the data sets considered (the data is “homoscedastic” or else it is “heteroscedastic”). Performing an ANOVA on heteroscedastic data sets increases the chance of false positives (McDonald, 2014. p. 147).}
+\definition{Assumption 3: Homoscedasticity}{ANOVA assumes that the standard deviation of the data is the same for the data sets considered (the data is “homoscedastic” or else it is “heteroscedastic”). Performing an ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.147]{McDonald2014b}.}
 
 \noindent
 Table 4.7 shows that the cophenetic distances obtained by applying the NJ method to the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of branches and forks is relatively small (0,0020998 /  0,0018566 = 1,1309758). Therefore, performing an ANOVA on the square root transformed data should minimize the chance of false positives.
@@ -110,24 +110,24 @@ Answering RQ2 (see paragraph 2.1) requires examining the phylogenetic trees of f
 The proposed method for answering this question is to use the same approach as in RQ1, but applying it to the two data sets obtained from code measurements and team measurements, thus estimating a “code-base tree” and a “team tree” for each fork. As explained in paragraph 3.2.2, the rationale for this approach is that two distinct but cooperating teams are expected to produce a code base with many similarities, while two competing teams will produce clearly distinct code bases. Therefore answering RQ2 required treating organizational and code measurements separately. Furthermore, as different organizations and code bases were compared, measurements representing the pairwise differences between releases within the same organization, i.e. “branches”, were discarded, and only “fork” measurements were analysed.
 
 \subsubsection{Choice of statistical method for analysis}
-The outcome of a fork is a nominal variable with three categories (“competition”, “cooperation”, “discontinuation”), the data-set used to construct the tree is a second nominal variable with two categories (“code” and “team”) and the cophenetic distance between releases on different forks is a measurement variable. The null hypothesis for RQ2 is that the mean cophenetic distance is not significantly different for the “outcome” categories considered. Rejecting the null hypothesis would provide evidence that the outcome of a fork can be predicted. A suitable test for this case is a two-way ANOVA (McDonald, 2014), where the measurement variable is the cophenetic distance between releases on different forks, and the two nominal variables are the outcome and the data-set used.
+The outcome of a fork is a nominal variable with three categories (“competition”, “cooperation”, “discontinuation”), the data-set used to construct the tree is a second nominal variable with two categories (“code” and “team”) and the cophenetic distance between releases on different forks is a measurement variable. The null hypothesis for RQ2 is that the mean cophenetic distance is not significantly different for the “outcome” categories considered. Rejecting the null hypothesis would provide evidence that the outcome of a fork can be predicted. A suitable test for this case is a two-way ANOVA \citep{McDonald2014b}, where the measurement variable is the cophenetic distance between releases on different forks, and the two nominal variables are the outcome and the data-set used.
 
 \subsubsection{Checking assumptions for RQ2}
-The assumptions of accuracy, normality and homoscedasticity apply to a two-way ANOVA as they do to a one-way ANOVA (McDonald, 2014. p. 176) but have to be checked against code measurements and team measurements to answer RQ2.
+The assumptions of accuracy, normality and homoscedasticity apply to a two-way ANOVA as they do to a one-way ANOVA \citep[p.176]{McDonald2014b} but have to be checked against code measurements and team measurements to answer RQ2.
 
 \definition{Assumption 1: Accuracy}{}
 
 \noindent
-As for RQ1, the three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix (Rohlf, 2013). Correlations were calculated for each data set and fork (table 4.9). The Neighbour-Joining method was found to produce the best correlation (correlation > 0.9911107), UPGMA is second (correlation > 0.8251281) and ME was the most inaccurate method (correlation > 0.0778508).
+As for RQ1, the three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix \citep{Rohlf2013a}. Correlations were calculated for each data set and fork (table 4.9). The Neighbour-Joining method was found to produce the best correlation (correlation > 0.9911107), UPGMA is second (correlation > 0.8251281) and ME was the most inaccurate method (correlation > 0.0778508).
 
 \definition{Assumption 2: Normality}{A two-way ANOVA assumes, as a one-way ANOVA does, that the data is normally distributed.}
 
 \noindent
-Performing a two-way ANOVA on data sets that are not normally distributed increases the chance of false positives (McDonald, 2014. p. 176).
+Performing a two-way ANOVA on data sets that are not normally distributed increases the chance of false positives \citep[p.176]{McDonald2014b}.
 
 Figure 4.3, illustrates the distribution of the cophenetic distances, obtained by applying the NJ method to data sets of code and team measurements separately. As explained in paragraph 4.2.2, only forks are considered for RQ2. The top row in figure 4.3 shows untransformed distances, the middle row shows the base-10 logarithm of the distances and the bottom row the square root of the distances. The histograms show that the distribution of the square root of distances (4.3, bottom row) better fits the normal distribution.
 
-\definition{Assumption 3: Homoscedasticity}{Two-way ANOVA assumes that the standard deviation of the data is the same for the data sets considered; performing a two-way ANOVA on heteroscedastic data sets increases the chance of false positives (McDonald, 2014. p. 176).}
+\definition{Assumption 3: Homoscedasticity}{Two-way ANOVA assumes that the standard deviation of the data is the same for the data sets considered; performing a two-way ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.176]{McDonald2014b}.}
 
 \noindent
 Table 4.10 shows that the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of fork distances from team and code data is relatively small (0.1435011 / 0.1258846 = 1.1399417). Therefore, performing a two-way ANOVA on the square root transformed data should minimize the chance of false positives.
@@ -159,7 +159,7 @@ However, to the best of my knowledge, there is very little work on transferring 
 The second objective, to select suitable repositories to collect data, showed that many open source repositories are accessible and can be mined for data on their release history and team composition. The source code had to be available online and additionally, the project's history back to the moment in time when the fork took place had to be available as well. Suitable projects were found and three were selected for analysis. The quantity of data collected justified the use of a database to store the data.
 
 \subsection{Objective 3: Implement the analytical methods}
-The third objective, to implement the analytical methods, was facilitated by the many libraries available for biological statistics. The methods and framework chosen are well documented (notably Paradis, 2011) and software was implemented to apply these methods to the data. As the amount of data was large (table 4.5) and the methods were computationally intensive, the amount of time required for computation was larger than had been anticipated. Practitioners might be advised to plan for a long computation time. The software implemented for the research is documented in appendix 2.
+The third objective, to implement the analytical methods, was facilitated by the many libraries available for biological statistics. The methods and framework chosen are well documented, notably by \citet{Paradis2011} and software was implemented to apply these methods to the data. As the amount of data was large (table 4.5) and the methods were computationally intensive, the amount of time required for computation was larger than had been anticipated. Practitioners might be advised to plan for a long computation time. The software implemented for the research is documented in appendix 2.
 
 \subsection{Objective 4: Analyse the data using methods from evolutionary biology}
 The fourth objective, to analyse the data using methods from evolutionary biology, was addressed by answering two research questions (paragraph 2.1):
@@ -190,16 +190,16 @@ Research question 2 (RQ2) dealt with forks as opportunities. If the outcome of a
 \subsection{Tree thinking}
 Phylogenetic trees are a depiction of estimated evolutionary relationships and could potentially be used to depict the state of a forked software project. This is illustrated in Figure 4.5, showing an example phylogenetic tree, constructed by subsampling the data collected for the MySQL / MariaDB fork. 
 
-Baum and Offner (2008) coined the term “tree-thinking” to sum up the skills required to interpret phylogenetic trees. Basic concepts of “tree-thinking” could be ported to computer science and help to communicate about software evolution in general and forking processes in particular. Baum and Offner (2008) list terms useful for conceptualizing the evolutionary relationships captured in phylogenetic trees:
+\citet{Baum2008b} coined the term “tree-thinking” to sum up the skills required to interpret phylogenetic trees. Basic concepts of “tree-thinking” could be ported to computer science and help to communicate about software evolution in general and forking processes in particular. \citet{Baum2008b} list terms useful for conceptualizing the evolutionary relationships captured in phylogenetic trees:
 
 \begin{description}
-\dt{Relatedness}{According to Baum and Offner (2008), the term “relatedness” is used in biology to describe the recency of common ancestry. Ported to software evolution, relatedness could refer to the number of software releases between a pair of releases and their last common ancestor. For example, in figure 4.5, MariaDB 10.0.1 and MySQL 5.6.5 (highlighted in blue) are more related to each other through their common ancestor MySQL 5.0.0 (highlighted in green), than to the majority of releases within their respective projects.}
+\dt{Relatedness}{According to \citet{Baum2008b}, the term “relatedness” is used in biology to describe the recency of common ancestry. Ported to software evolution, relatedness could refer to the number of software releases between a pair of releases and their last common ancestor. For example, in figure 4.5, MariaDB 10.0.1 and MySQL 5.6.5 (highlighted in blue) are more related to each other through their common ancestor MySQL 5.0.0 (highlighted in green), than to the majority of releases within their respective projects.}
 
-\dt{Clade}{In biological evolution, a clade is a group comprised of an ancestor and all its descendants (Baum and Offner, 2008). In the study of software evolution, a clade could be defined as the release which introduced a feature and all subsequent releases. For example, in the MySQL/MariaDB fork depicted in figure 4.5, the MySQL 5.6.11, MySQL 5.7 and MySQL 8 series branched at the same node (highlighted in purple), which suggests that they share one or more important features.}
+\dt{Clade}{In biological evolution, a clade is a group comprised of an ancestor and all its descendants \citep{Baum2008b}. In the study of software evolution, a clade could be defined as the release which introduced a feature and all subsequent releases. For example, in the MySQL/MariaDB fork depicted in figure 4.5, the MySQL 5.6.11, MySQL 5.7 and MySQL 8 series branched at the same node (highlighted in purple), which suggests that they share one or more important features.}
 
-\dt{Parsimony}{The principle of parsimony states that the most likely tree is the one which displays the data in the simplest way, i.e. the tree that implies the least number of evolutionary changes (Baum and Offner, 2008). While this might not be what actually happened, the parsimony principle allows reducing complex relationships to a manageable size. Therefore, parsimony could be applied to depict and grasp the release history of complex software projects.  For example, in figure 4.5, MySQL 8.0.0 (highlighted in yellow) is depicted as closely related to the MySQL 5.7 series.}
+\dt{Parsimony}{The principle of parsimony states that the most likely tree is the one which displays the data in the simplest way, i.e. the tree that implies the least number of evolutionary changes \citep{Baum2008b}. While this might not be what actually happened, the parsimony principle allows reducing complex relationships to a manageable size. Therefore, parsimony could be applied to depict and grasp the release history of complex software projects.  For example, in figure 4.5, MySQL 8.0.0 (highlighted in yellow) is depicted as closely related to the MySQL 5.7 series.}
 
-\dt{Convergent evolution}{Similarities between biological organisms can arise in unrelated clades as a result of convergent evolution (Baum and Offner, 2008). In computer science, convergent evolution could be used to describe the situation that arises when unrelated software develops similar features. For example, several mobile operating systems have opted to distribute their software through an online "application store"; however, this does not imply that their source code stems from a common origin: as discussed in paragraph 4.1, the Android operating system is related to the Linux operating system; there are however other mobile operating systems (e.g. iOS) which are unrelated to Linux, but have opted for a similar "application store" distribution model.}
+\dt{Convergent evolution}{Similarities between biological organisms can arise in unrelated clades as a result of convergent evolution \citep{Baum2008b}. In computer science, convergent evolution could be used to describe the situation that arises when unrelated software develops similar features. For example, several mobile operating systems have opted to distribute their software through an online "application store"; however, this does not imply that their source code stems from a common origin: as discussed in paragraph 4.1, the Android operating system is related to the Linux operating system; there are however other mobile operating systems (e.g. iOS) which are unrelated to Linux, but have opted for a similar "application store" distribution model.}
 \end{description}
 
 %----------------------------------------------------------------------------------------
