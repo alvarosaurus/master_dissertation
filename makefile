@@ -19,7 +19,7 @@ prepare:
 	cp -r templates/* temp
 	cp -r docs/* temp
 	mv temp/Chapters/*.tex temp
-	cp -r figures temp
+	cp -r figures/* temp
 
 # cleanup output and temp files
 clean:

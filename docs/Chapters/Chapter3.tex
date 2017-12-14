@@ -96,7 +96,14 @@ These hypotheses can be translated into statistical hypotheses by calculating th
 
 %----------------------------------------------------------------------------------------
 \section{Research procedures}
-The research questions are examined by applying the activities detailed in figure 3.1.
+The research questions are examined by applying the activities detailed in figure \ref{fig:methods}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{methods.png}
+  \caption{Activity diagram of the steps necessary for estimating phylogenetic relationships using distance-based methods, as implemented for the present research.}
+  \label{fig:methods}
+\end{figure}
 
 \subsection{Data acquisition and re-encoding}
 Data was acquired from selected open source repositories. The choice of software projects to study was guided by the comprehensive review of forks provided by \citet{Robles2012a}. Forks are per definition only possible in an open source context, therefore any conclusions apply in this context only. Additionally, the choice of projects was limited by the availability of a complete release history of the project, at least as far back as the moment in time were the fork happened.
@@ -113,7 +120,14 @@ Table 3.2 shows an example distance matrix, constructed by subsampling the data 
 \subsection{Phylogenetic trees and cophenetic distances}
 The proposed methods for answering the research questions involve constructing phylogenetic trees by applying the methods described in 3.1.3.
 
-Figure 3.2 shows an example tree constructed using the subsample of the data presented in table 3.2. The Neighbour-Joining algorithm \citep{Saitou1987a} was used to estimate the tree.
+Figure \ref{fig:sample_tree} shows an example tree constructed using the subsample of the data presented in table 3.2. The Neighbour-Joining algorithm \citep{Saitou1987a} was used to estimate the tree.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{mysql_sample_tree.png}
+  \caption{An example tree obtained by applying the NJ method to the data in table 3, showing the longest (red) and shortest (green) distances between tips of the tree.}
+  \label{fig:sample_tree}
+\end{figure}
 
 The next step is to calculate the cophenetic distances between the tips of the trees. Figure 3.2 illustrates this: the green line represents the shortest path between two tips in the example; the red line represents the longest path between two tips.
 
@@ -122,7 +136,14 @@ Table 3.3 shows an example cophenetic matrix. Please note that the cophenetic ma
 The distance matrix can be shaded to show the degree of dissimilarity between releases, and the matrix can then be rearranged into clusters of the same shade. This representation was introduced by \citet{Sneath1962a} and used to discover species and genus in the data. Table 3.4 shows that in the example data, MySQL releases are close to each other, while MySQL 5.7.12 and all releases of MariaDB are the most distant from each other (light-shaded cells in the bottom row).
 
 \subsection{Analysis of variance}
-As detailed in 3.2.1, answering RQ1 requires computing a matrix of the cophenetic distances between releases and estimating if these distances correlate to forks and branches. Figure 3.3 shows a box plot of the cophenetic distances in the example data. The plot shows that distances between tips inside either project (“Branches”) are statistically smaller than the distances between tips on different forks (“Forks”).
+As detailed in 3.2.1, answering RQ1 requires computing a matrix of the cophenetic distances between releases and estimating if these distances correlate to forks and branches. Figure \ref{fig:example_boxplot} shows a box plot of the cophenetic distances in the example data. The plot shows that distances between tips inside either project (“Branches”) are statistically smaller than the distances between tips on different forks (“Forks”).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{example_boxplot.png}
+  \caption{A box plot of the cophenetic distances of branches and forks in the example data.}
+  \label{fig:example_boxplot}
+\end{figure}
 
 According to \citet{McDonald2014b}, choosing a method for statistical analysis is primarily guided by the kind and number of variables required to test the hypothesis. The cophenetic distance is a measurement variable, and whether the pairwise distance between releases corresponds to a “fork” or “branch” is a nominal variable. \citet{McDonald2014b} lists two methods for testing a hypothesis based on one measurement and one nominal variable: “student's t-test” and “analysis of variance” (ANOVA).
 
