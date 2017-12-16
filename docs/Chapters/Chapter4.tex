@@ -9,15 +9,57 @@
 \section{Summary of data collected}
 In order to answer the research questions (2.1), three cases of forks with different outcomes were selected. Forking reasons and outcomes are characterized here using the terminology introduced by \citet{Robles2012a}.
 
+\subsubsection{MySQL server / MariaDB server}
+The open source database server MySQL was purchased by Sun Inc. in 2008, resulting in the departure of the original chief engineer (on good terms) to form his own company, MariaDB \citep{Widenius2009}. Subsequently, Sun was acquired by Oracle. Oracle’s attempt to highjack the project \citep{Nyman2013a} led to a full-fledged fork in 2012 \citep{Widenius2012}.
+
 \begin{description}
-\dt{MySQL server / MariaDB server}
-\dd{The open source database server MySQL was purchased by Sun Inc. in 2008, resulting in the departure of the original chief engineer (on good terms) to form his own company, MariaDB \citep{Widenius2009}. Subsequently, Sun was acquired by Oracle. Oracle’s attempt to highjack the project \citep{Nyman2013a} led to a full-fledged fork in 2012 \citep{Widenius2012}.}
+  \dt{Repositories}
+  \dd{
+    MySQL \\ https://github.com/mysql/mysql-server.git \\
+    MariaDB \\ https://github.com/MariaDB/server.git
+  }
+  
+  \dt{Reasons for the fork}
+  \dd{Technical, more community-driven development, legal issues.}
 
-\dt{Linux kernel / Android kernel}
-\dd{In 2005, Google Inc. bought Android, then a start-up developing a Linux-based operating system for cellular phones, in order to expand its search service to the mobile market \citep{Elgin2005}. The Linux community and Google have been cooperating on the core system, while Google continues to develop device-specific extensions to the core under a shared open source licensing regime \citep{Vaughan-Nichols2011}.}
+  \dt{Outcome}
+  \dd{Competition, successful branching, with differentiation.}
+\end{description}
 
-\dt{Apache OpenOffice / LibreOffice}
-\dd{Development of the OpenOffice suite of office applications began in 2000, in a company owned by Sun Microsystems; following the acquisition of Sun by Oracle, OpenOffice was forked into LibreOffice by its developers in 2010; as OpenOffice lost momentum, Oracle donated the project to the Apache foundation in 2011 \citep{Gamalielsson2014b}.}
+\subsubsection{Linux kernel / Android kernel}
+In 2005, Google Inc. bought Android, then a start-up developing a Linux-based operating system for cellular phones, in order to expand its search service to the mobile market \citep{Elgin2005}. The Linux community and Google have been cooperating on the core system, while Google continues to develop device-specific extensions to the core under a shared open source licensing regime \citep{Vaughan-Nichols2011}.
+
+\begin{description}
+  \dt{Repositories}
+  \dd{
+    Linux \\ git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \\
+    Android \\
+    https://android.googlesource.com/kernel/common \\
+    https://android.googlesource.com/kernel/x86\textunderscore64
+  }
+  
+  \dt{Reasons for the fork}
+  \dd{Commercial strategy, technical.}
+  
+  \dt{Outcome}
+  \dd{Cooperation, successful branching, with differentiation.}
+\end{description}
+
+\subsubsection{Apache OpenOffice / LibreOffice}
+Development of the OpenOffice suite of office applications began in 2000, in a company owned by Sun Microsystems; following the acquisition of Sun by Oracle, OpenOffice was forked into LibreOffice by its developers in 2010; as OpenOffice lost momentum, Oracle donated the project to the Apache foundation in 2011 \citep{Gamalielsson2014b}.
+
+\begin{description}
+  \dt{Repositories}
+  \dd{
+    Apache OpenOffice \\ https://github.com/apache/openoffice.git \\
+    LibreOffice \\ git://anongit.freedesktop.org/libreoffice
+  }
+  
+  \dt{Reasons for the fork}
+  \dd{More community-driven development, discontinuation of the original project.}
+
+  \dt{Outcome}
+  \dd{Discontinuation of the original, successful continuation of the fork.}
 \end{description}
 
 \subsection{Data acquisition}
@@ -25,7 +67,30 @@ In order to make the data easier to process, a database was populated with data 
 
 Team members were identified by their login name, publicly available through the repositories’ logs. Login names were replaced by non-reversible unique hashes prior to being stored in a local database (in line with ethical considerations in paragraph 3.4).
 
-The raw data as obtained from the repositories and stored in the local database is summarized in table 4.4.
+The raw data as obtained from the repositories and stored in the local database is summarized in table \ref{table:rawdata}.
+
+\begin{table}[H]
+\caption{Raw data characteristics (database entry counts).}
+\label{table:rawdata} 
+\centering
+\begin{tabu} to \linewidth{lrrrrrr}
+  \toprule
+  & \multicolumn{2}{c}{Fork 1} & \multicolumn{2}{c}{Fork 2} & \multicolumn{2}{c}{Fork 3} \\
+  \midrule
+  Project & \textbf{MySQL} & \textbf{MariaDB} & \textbf{Linux} & \textbf{Android} & \textbf{OpenOffice} & \textbf{LibreOffice} \\
+  \midrule
+  Releases & 51 & 57 & 32 & 31 & 8 & 85 \\
+  \midrule
+  Files & \num{33141} & \num{29013} & \num{85421} & \num{77670} & \num{67964} & \num{162883} \\
+  \midrule
+  File versions & \num{871041} & \num{1045377} & \num{1427758} & \num{1376099} & \num{497036} & \num{5685337} \\
+  \midrule
+  Contributors & \num{1230} & \num{1320} & \num{16081} & \num{16325} & 42 & \num{1219} \\
+  \midrule
+  Edits and \\commits \\combined & \num{8236} & \num{8725} & \num{57103} & \num{37654} & 164 & \num{6999} \\
+  \bottomrule
+\end{tabu}
+\end{table}
 
 \subsection{Exporting and recoding the data for analysis}
 The measurements obtained from the data were exported in a format suitable for analysis: a spreadsheet where columns represent releases and rows represent measured characteristics.
@@ -40,7 +105,35 @@ A Python script was written to export the data. The script handles re-encoding a
 Binary characters, e.g. presence/absence of a file in a branch, were encoded as a row of Boolean values. Count characters were encoded as integers. Measurement characters, e.g. checksums of files, were recoded into classes: if a file is the same for all branches, there was only one class, if a file changes in all branches, there were as many classes as branches and so on (see table 3.1 for an overview of the data types used).
 
 \subsubsection{Cleaning-up}
-The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table 4.5).
+The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table \ref{cleanup}).
+
+\begin{table}[H]
+\caption{Measurement characteristics (spreadsheet row counts), after clean-up.}
+\label{table:cleanup} 
+\centering
+\begin{tabu} to \linewidth{P{5cm}rrr}
+  \toprule
+  Characteristic & MySQL / MariaDB & Linux / Android & OpenOffice / LibreOffice \\
+  \midrule
+  File version presence / absence & \num{51209} & \num{87706} & \num{171695} \\
+  \midrule
+  File version checksum & \num{621} & \num{6705} & \num{23905} \\
+  \midrule
+  Contributor presence / absence & \num{1505} & \num{16325} & \num{1232} \\
+  \midrule
+  Edit count per contributor & \num{1505} & \num{16325} & \num{1232} \\
+  \midrule
+  Commit count per contributor & \num{1505} & \num{16325} & \num{1232} \\
+  \midrule
+  Total number of columns (branches) & 107 & 63 & 93 \\
+  \midrule
+  Total number of rows (characteristics) & \num{56648} & \num{144299} & \num{199296} \\
+  \midrule
+  Percentage of raw data after clean-up & 53\% & 64\% & 57\% \\
+  \bottomrule
+\end{tabu}
+\end{table}
+
 
 \subsection{Applying phylogenetic methods}
 Distance matrices were computed and phylogenetic trees were estimated for each fork case studied. The software was written using the R language for statistical computing \citep{RDevelopmentCoreTeam2008a}. The classes implemented are wrappers for the R functions provided by packages for general and biological statistics. 

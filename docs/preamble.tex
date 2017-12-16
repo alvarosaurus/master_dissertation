@@ -54,11 +54,14 @@ oneside,
 \usepackage{tabu}
 \usepackage{booktabs} % Horizontal rules in tables
 \usepackage{caption}
-
+\usepackage{ragged2e}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{bmpsize}
-
+\usepackage{tablefootnote}
+\usepackage{array}
+\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
+\usepackage{siunitx} % number format
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
 %----------------------------------------------------------------------------------------
