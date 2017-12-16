@@ -36,41 +36,13 @@ Software source code is generally developed and stored in a code repository. Cod
 \item{\textit{Code ownership} was recorded as the number of commits by each team member for each release. Committers control which edits make it into the code base, so the number of commits indicates how much a release is owned by a team.}
 \end{itemize}
 
-\begin{table}[H]
-\caption{Summary of characteristics and their data types}
-\label{table:characteristics} 
-\centering
-\begin{tabu} to \linewidth{p{5cm} p{5cm} p{5cm}}
-  \toprule
-  Characteristic & Domain & Data type \\
-  \midrule
-  Presence (or absence) of a file in a release &
-  One measurement for each version of a file in a release &
-  Boolean \\
-  \midrule
-  File changes (checksums) &
-  One measurement for each version of a file in a release &
-  categorical \\
-  \midrule
-  Team composition &
-  One measurement for each team member contributing to a release &
-  Boolean \\
-  \midrule
-  Edit frequency &
-  One measurement for each team member contributing to a release &
-  integer \\
-  \midrule
-  Code ownership &
-  One measurement for each team member contributing to a release &
-  integer \\
-\bottomrule
-\end{tabu}
-\end{table}
+%-- table ----------
+\input{ch3_characteristics.tex}
 
 \subsection{Techniques for computing the distance matrix}
 As discussed in the review of literature on evolutionary techniques (2.2.3), “distance matrix methods”, i.e. evolutionary techniques that use a matrix of pairwise dissimilarity between entities to estimate a classification \citep{FelsensteinJ.andFelenstein2004a} offer an approach that produces accurate results and performs well on large data sets.
 
-The distance matrix is computed on the base of the measurements obtained using the techniques described in paragraph 3.1.1. The result is a matrix with one column and one row for each software release, were each cell contains a measure of the pairwise dissimilarity between the corresponding two releases. As the measurements used are of different data types (table \ref{table:characteristics}), a technique that can calculate the distance matrix by combining measurements of mixed data types is required. The Gower distance provided by the R-package “StatMatch” provides such an algorithm \citep{DOrazio2016}.
+The distance matrix is computed on the base of the measurements obtained using the techniques described in paragraph 3.1.1. The result is a matrix with one column and one row for each software release, were each cell contains a measure of the pairwise dissimilarity between the corresponding two releases. As the measurements used are of different data types (table \ref{table:ch3_characteristics}), a technique that can calculate the distance matrix by combining measurements of mixed data types is required. The Gower distance provided by the R-package “StatMatch” provides such an algorithm \citep{DOrazio2016}.
 
 \subsection{Estimating the phylogeny of releases}
 Having computed a distance matrix using the techniques described in paragraph 3.1.2, the next step is to estimate a phylogenetic tree that represents the relationships between the software releases studied. The choice of techniques for estimating trees is based on the reference provided by \citet{Paradis2011}, as discussed in 2.2.2. Commonly used techniques for estimating trees include:
@@ -144,7 +116,7 @@ As forking is a process at the crossroads between technical evolution and organi
 Data has to be re-encoded in order to be processable. This process is explained in detail in paragraph 4.1.2. Guidelines for re-encoding characters can be found in \citet{Sokal1986a}.
 
 \subsection{Distance matrices}
-As explained in paragraph 3.1.2, the chosen methods for answering the research questions are all part of the “distance matrix” family of phylogenetic methods. As shown in figure 3.1, a matrix of the pairwise dissimilarity between the releases of the chosen fork has to be computed. Several techniques are available to compute a distance matrix: computing Euclidean, or “Manhattan” distances are commonly used \citep{Felsenstein1982a}. However, these techniques are limited to processing numerical and Boolean data respectively. As the acquired data is of various data types (Boolean, categorical, numerical, see table \ref{table:characteristics}) the chosen method is required to process different data types. Only the “Gower” technique \citep{DOrazio2016} satisfies this requirement. However, the Gower technique is limited in that matrix rows with missing values do not contribute to the result, therefore, part of the data acquired was discarded before processing.
+As explained in paragraph 3.1.2, the chosen methods for answering the research questions are all part of the “distance matrix” family of phylogenetic methods. As shown in figure 3.1, a matrix of the pairwise dissimilarity between the releases of the chosen fork has to be computed. Several techniques are available to compute a distance matrix: computing Euclidean, or “Manhattan” distances are commonly used \citep{Felsenstein1982a}. However, these techniques are limited to processing numerical and Boolean data respectively. As the acquired data is of various data types (Boolean, categorical, numerical, see table \ref{table:ch3_characteristics}) the chosen method is required to process different data types. Only the “Gower” technique \citep{DOrazio2016} satisfies this requirement. However, the Gower technique is limited in that matrix rows with missing values do not contribute to the result, therefore, part of the data acquired was discarded before processing.
 
 Table 3.2 shows an example distance matrix, constructed by subsampling the data collected for the Mysql / MariaDB fork (see 4.1 for details). Ten branches and thousand measurement characters were selected at random (the original data set has 107 branches and 56 648 measurement characters).
 

@@ -1,8 +1,9 @@
 (TeX-add-style-hook
  "Chapter3"
  (lambda ()
+   (TeX-run-style-hooks
+    "ch3_characteristics")
    (LaTeX-add-labels
-    "table:characteristics"
     "fig:methods"
     "fig:sample_tree"
     "fig:example_boxplot"))
