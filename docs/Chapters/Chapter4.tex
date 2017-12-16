@@ -67,30 +67,10 @@ In order to make the data easier to process, a database was populated with data 
 
 Team members were identified by their login name, publicly available through the repositories’ logs. Login names were replaced by non-reversible unique hashes prior to being stored in a local database (in line with ethical considerations in paragraph 3.4).
 
-The raw data as obtained from the repositories and stored in the local database is summarized in table \ref{table:rawdata}.
+The raw data as obtained from the repositories and stored in the local database is summarized in table \ref{table:ch4_rawdata}.
 
-\begin{table}[H]
-\caption{Raw data characteristics (database entry counts).}
-\label{table:rawdata} 
-\centering
-\begin{tabu} to \linewidth{lrrrrrr}
-  \toprule
-  & \multicolumn{2}{c}{Fork 1} & \multicolumn{2}{c}{Fork 2} & \multicolumn{2}{c}{Fork 3} \\
-  \midrule
-  Project & \textbf{MySQL} & \textbf{MariaDB} & \textbf{Linux} & \textbf{Android} & \textbf{OpenOffice} & \textbf{LibreOffice} \\
-  \midrule
-  Releases & 51 & 57 & 32 & 31 & 8 & 85 \\
-  \midrule
-  Files & \num{33141} & \num{29013} & \num{85421} & \num{77670} & \num{67964} & \num{162883} \\
-  \midrule
-  File versions & \num{871041} & \num{1045377} & \num{1427758} & \num{1376099} & \num{497036} & \num{5685337} \\
-  \midrule
-  Contributors & \num{1230} & \num{1320} & \num{16081} & \num{16325} & 42 & \num{1219} \\
-  \midrule
-  Edits and \\commits \\combined & \num{8236} & \num{8725} & \num{57103} & \num{37654} & 164 & \num{6999} \\
-  \bottomrule
-\end{tabu}
-\end{table}
+%-- table ----------
+\input{ch4_rawdata.tex}
 
 \subsection{Exporting and recoding the data for analysis}
 The measurements obtained from the data were exported in a format suitable for analysis: a spreadsheet where columns represent releases and rows represent measured characteristics.
@@ -105,35 +85,10 @@ A Python script was written to export the data. The script handles re-encoding a
 Binary characters, e.g. presence/absence of a file in a branch, were encoded as a row of Boolean values. Count characters were encoded as integers. Measurement characters, e.g. checksums of files, were recoded into classes: if a file is the same for all branches, there was only one class, if a file changes in all branches, there were as many classes as branches and so on (see table 3.1 for an overview of the data types used).
 
 \subsubsection{Cleaning-up}
-The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table \ref{cleanup}).
+The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table \ref{ch4_cleanup}).
 
-\begin{table}[H]
-\caption{Measurement characteristics (spreadsheet row counts), after clean-up.}
-\label{table:cleanup} 
-\centering
-\begin{tabu} to \linewidth{P{5cm}rrr}
-  \toprule
-  Characteristic & MySQL / MariaDB & Linux / Android & OpenOffice / LibreOffice \\
-  \midrule
-  File version presence / absence & \num{51209} & \num{87706} & \num{171695} \\
-  \midrule
-  File version checksum & \num{621} & \num{6705} & \num{23905} \\
-  \midrule
-  Contributor presence / absence & \num{1505} & \num{16325} & \num{1232} \\
-  \midrule
-  Edit count per contributor & \num{1505} & \num{16325} & \num{1232} \\
-  \midrule
-  Commit count per contributor & \num{1505} & \num{16325} & \num{1232} \\
-  \midrule
-  Total number of columns (branches) & 107 & 63 & 93 \\
-  \midrule
-  Total number of rows (characteristics) & \num{56648} & \num{144299} & \num{199296} \\
-  \midrule
-  Percentage of raw data after clean-up & 53\% & 64\% & 57\% \\
-  \bottomrule
-\end{tabu}
-\end{table}
-
+%-- table ----------
+\input{ch4_cleanup.tex}
 
 \subsection{Applying phylogenetic methods}
 Distance matrices were computed and phylogenetic trees were estimated for each fork case studied. The software was written using the R language for statistical computing \citep{RDevelopmentCoreTeam2008a}. The classes implemented are wrappers for the R functions provided by packages for general and biological statistics. 
@@ -166,7 +121,10 @@ Whether a pair of releases represents a fork or a branch is a nominal variable w
 \definition{Assumption 1: Accuracy}{Methods for computing trees from distance matrices are assumed to produce trees that represent the distance matrix accurately.}
 
 \noindent
-The three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix \citep{Rohlf2013a}. Correlations (Pearson's Chi-squared test) were calculated for each fork (table 4.6). The Neighbour-Joining method was found to produce the best correlation for the 3 data sets considered (correlation > 0.991086), UPGMA is second (correlation > 0.823779) and ME is the most inaccurate method (correlation > 0.512404).
+The three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix \citep{Rohlf2013a}. Correlations (Pearson's Chi-squared test) were calculated for each fork (table \ref{table:ch4_rq1_corr}). The Neighbour-Joining method was found to produce the best correlation for the 3 data sets considered (correlation > 0.991086), UPGMA is second (correlation > 0.823779) and ME is the most inaccurate method (correlation > 0.512404).
+
+%-- table ----------
+\input{ch4_rq1_corr.tex}
 
 \definition{Assumption 2: Normality}{ANOVA assumes that the data is normally distributed (fits the Gaussian “bell curve”) and that the standard deviation is the same for the data sets examined. Performing an ANOVA on data sets that are not normally distributed increases the chance of false positives \citep[p.147]{McDonald2014b}.}
 
@@ -180,10 +138,10 @@ As can be seen in figure \ref{fig:rq1_distributions}, the data is not normally d
   \label{fig:rq1_distributions}
 \end{figure}
 
-\definition{Assumption 3: Homoscedasticity}{ANOVA assumes that the standard deviation of the data is the same for the data sets considered (the data is “homoscedastic” or else it is “heteroscedastic”). Performing an ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.147]{McDonald2014b}.}
+\definition{Assumption 3: Homoscedasticity}{ANOVA assumes that the standard deviation of the data is the same for the data sets considered (the data is “homoscedastic” or else it is “heteroscedastic”). Performing an ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.147]{McDonald2014b}.} Table \ref{ch4_rq1_sd.tex} shows that the cophenetic distances obtained by applying the NJ method to the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of branches and forks is relatively small (0,0020998 /  0,0018566 = 1,1309758). Therefore, performing an ANOVA on the square root transformed data should minimize the chance of false positives.
 
-\noindent
-Table 4.7 shows that the cophenetic distances obtained by applying the NJ method to the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of branches and forks is relatively small (0,0020998 /  0,0018566 = 1,1309758). Therefore, performing an ANOVA on the square root transformed data should minimize the chance of false positives.
+%-- table ----------
+\input{ch4_rq1_sd.tex}
 
 \subsubsection{One-way analysis of variance (ANOVA)}
 The analysis involved the following steps:
@@ -200,7 +158,10 @@ The analysis involved the following steps:
 \item{One-way ANOVA was performed on the square-root of the cophenetic distances.}
 \end{enumerate}
 
-The analysis of the square root transformed data with one-way ANOVA (table 4.8) show that the nominal variable “release type” (i.e. “branches” or “forks”) has significant influence on the cophenetic distance between releases (p < 2e-16). Therefore the null hypothesis can be rejected.
+The analysis of the square root transformed data with one-way ANOVA (table \ref{table:ch4_rq1_anova}) show that the nominal variable “release type” (i.e. “branches” or “forks”) has significant influence on the cophenetic distance between releases (p < 2e-16). Therefore the null hypothesis can be rejected.
+
+%-- table ----------
+\input{ch4_rq1_anova.tex}
 
 This result is visualised in the plot in figure \ref{fig:rq1_all}: The mean cophenetic distance between releases on different forks is larger than the mean distance between releases on different branches, using data from the three projects considered.
 
@@ -224,7 +185,10 @@ The assumptions of accuracy, normality and homoscedasticity apply to a two-way A
 \definition{Assumption 1: Accuracy}{}
 
 \noindent
-As for RQ1, the three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix \citep{Rohlf2013a}. Correlations were calculated for each data set and fork (table 4.9). The Neighbour-Joining method was found to produce the best correlation (correlation > 0.9911107), UPGMA is second (correlation > 0.8251281) and ME was the most inaccurate method (correlation > 0.0778508).
+As for RQ1, the three methods chosen in 3.1.3 (UPGMA, NJ, ME) were applied, and the correlation between the distance matrix and the cophenetic matrix obtained from each tree was used as a measure of how accurately the trees represent the distance matrix \citep{Rohlf2013a}. Correlations were calculated for each data set and fork (table \ref{table:ch4_rq2_corr}). The Neighbour-Joining method was found to produce the best correlation (correlation > 0.9911107), UPGMA is second (correlation > 0.8251281) and ME was the most inaccurate method (correlation > 0.0778508).
+
+%-- table ----------
+\input{ch4_rq2_corr.tex}
 
 \definition{Assumption 2: Normality}{A two-way ANOVA assumes, as a one-way ANOVA does, that the data is normally distributed.}
 
@@ -240,11 +204,13 @@ Figure \ref{fig:rq2_distributions}, illustrates the distribution of the cophenet
   \label{fig:rq2_distributions}
 \end{figure}
 
-
 \definition{Assumption 3: Homoscedasticity}{Two-way ANOVA assumes that the standard deviation of the data is the same for the data sets considered; performing a two-way ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.176]{McDonald2014b}.}
 
 \noindent
-Table 4.10 shows that the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of fork distances from team and code data is relatively small (0.1435011 / 0.1258846 = 1.1399417). Therefore, performing a two-way ANOVA on the square root transformed data should minimize the chance of false positives.
+Table \ref{table:ch4_rq2_sd} shows that the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of fork distances from team and code data is relatively small (0.1435011 / 0.1258846 = 1.1399417). Therefore, performing a two-way ANOVA on the square root transformed data should minimize the chance of false positives.
+
+%-- table ----------
+\input{ch4_rq2_sd.tex}
 
 \subsubsection{Two-way analysis of variance}
 The analysis involves the following steps:
@@ -257,7 +223,10 @@ The analysis involves the following steps:
 \item{Two-way ANOVA was performed on the square-root of the cophenetic distances (the measurement variable), as the square root transformed data is closer to a normal distribution than the raw data and is reasonably homoscedastic (as discussed under “checking assumptions for RQ2”).}
 \end{enumerate}
 
-The analysis of the square root transformed data with two-way ANOVA (table 4.11) showed that the nominal variable “dataset” (i.e. “code” or “team”) has significant influence on the cophenetic distance between releases (p < 2e-16), but the nominal variable “outcome” (i.e. “cooperation”, “competition” or “discontinued branch”) does not (p = 0.7808). Therefore, the null hypothesis cannot be rejected.
+The analysis of the square root transformed data with two-way ANOVA (table \ref{table:ch4_rq2_anova}) showed that the nominal variable “dataset” (i.e. “code” or “team”) has significant influence on the cophenetic distance between releases (p < 2e-16), but the nominal variable “outcome” (i.e. “cooperation”, “competition” or “discontinued branch”) does not (p = 0.7808). Therefore, the null hypothesis cannot be rejected.
+
+%-- table ----------
+\input{ch4_rq2_anova.tex}
 
 % ----------------------------------------------------------------------------------------
 

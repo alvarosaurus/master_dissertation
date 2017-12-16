@@ -1,0 +1,32 @@
+\begin{table}[H]
+\caption{Correlations (Pearson's Chi-squared test) between distance and cophenetic matrices for
+each fork, data set and method: This is a measure of how accurately a tree represents a distance
+matrix.}
+\label{table:ch4_rq2_corr} 
+\centering
+\begin{tabu} to \linewidth{P{4.5cm}P{1cm}P{2cm}P{2.5cm}P{2cm}}
+  \toprule
+  Projects (code and team measurements) & Data set & Method used to estimate the tree & Correlation between distance matrix and tree & p-value * \\
+  \midrule  
+  MySQL / MariaDB & code & UPGMA & 0.8251281 & < 2.2e-16 \\
+  & & NJ & 0.9927274 & < 2.2e-16 \\
+  & & ME & 0.5998447 & < 2.2e-16 \\
+  & team & UPGMA & 0.9929009 & < 2.2e-16 \\
+  & & NJ & 0.9992199 & < 2.2e-16 \\
+  & & ME & 0.1767751 & < 2.2e-16 \\
+  Linux / Android & code & UPGMA & 0.8946243 & < 2.2e-16 \\
+  & & NJ & 0.9913005 & < 2.2e-16 \\
+  & & ME & 0.1514915 & < 2.2e-16 \\
+  & team & UPGMA & 0.9825261 & < 2.2e-16 \\
+  & & NJ & 0.9963651 & < 2.2e-16 \\
+  & & ME & 0.2269441 & < 2.2e-16 \\
+  OpenOffice / LibreOffice & code & UPGMA & 0.9368205 & < 2.2e-16 \\
+  & & NJ & 0.9911107 & < 2.2e-16 \\
+  & & ME & 0.9833041 & < 2.2e-16 \\
+  & team & UPGMA & 0.9842443 & < 2.2e-16 \\
+  & & NJ & 0.9971370 & < 2.2e-16 \\
+  & & ME & 0.0778508 & 4.166e-13 \\
+  \bottomrule
+\end{tabu}
+\end{table}
+\noindent * 2.2e-16 is the smallest non zero floating point number than can be stored on the machine used.

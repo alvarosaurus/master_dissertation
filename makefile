@@ -20,6 +20,7 @@ prepare:
 	cp -r docs/* temp
 	mv temp/Chapters/*.tex temp
 	cp -r figures/* temp
+	cp -r tables/* temp
 
 # cleanup output and temp files
 clean:

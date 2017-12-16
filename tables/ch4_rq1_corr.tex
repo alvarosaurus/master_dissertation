@@ -1,0 +1,23 @@
+\begin{table}[H]
+\caption{Correlations between distance and cophenetic matrices for each fork and method.}
+\label{table:ch4_rq1_corr} 
+\centering
+\begin{tabu} to \linewidth{P{5cm}P{3cm}P{3cm}P{2cm}}
+  \toprule
+  Projects (code and team measurements) & Method used to estimate the tree & Correlation between distance matrix and tree & p-value * \\
+  \midrule  
+  \multirow{3}{*}{MySQL / MariaDB} & UPGMA & 0.823779 & < 2.2e-16 \\
+  & NJ & 0.993690 & < 2.2e-16 \\
+  & ME & 0.624948 & < 2.2e-16 \\
+  \midrule  
+  \multirow{3}{*}{Linux / Android} & UPGMA & 0.881565 & < 2.2e-16 \\
+  & NJ & 0.994087 & < 2.2e-16 \\
+  & ME & 0.512404 & < 2.2e-16 \\
+  \midrule  
+  \multirow{3}{*}{OpenOffice / LibreOffice} & UPGMA & 0.936611 & < 2.2e-16 \\
+  & NJ & 0.991086 & < 2.2e-16 \\
+  & ME & 0.983237 & < 2.2e-16 \\
+  \bottomrule
+\end{tabu}
+\end{table}
+\noindent * 2.2e-16 is the smallest non zero floating point number than can be stored on the machine used.
