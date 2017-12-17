@@ -9,7 +9,7 @@
 \section{Methods and techniques selected}
 In the following sections the term “technique” is used for any procedure that can be boiled down to an algorithm, while the term “method” is used for a coherent combination of techniques.
 
-As illustrated in figure 1.1, and further elaborated in the working definition of “software evolution” in paragraph 1.3, the methods and techniques chosen are applied to a population of software releases. Therefore, the basic entity under scrutiny, the “operational taxonomic unit” \citep{Sokal1986a}, is the “software release”.
+As illustrated in figure \ref{fig:evolution}, and further elaborated in the working definition of “software evolution” in paragraph 1.3, the methods and techniques chosen are applied to a population of software releases. Therefore, the basic entity under scrutiny, the “operational taxonomic unit” \citep{Sokal1986a}, is the “software release”.
 
 \subsection{Data acquisition and encoding techniques}
 
@@ -118,7 +118,10 @@ Data has to be re-encoded in order to be processable. This process is explained 
 \subsection{Distance matrices}
 As explained in paragraph 3.1.2, the chosen methods for answering the research questions are all part of the “distance matrix” family of phylogenetic methods. As shown in figure 3.1, a matrix of the pairwise dissimilarity between the releases of the chosen fork has to be computed. Several techniques are available to compute a distance matrix: computing Euclidean, or “Manhattan” distances are commonly used \citep{Felsenstein1982a}. However, these techniques are limited to processing numerical and Boolean data respectively. As the acquired data is of various data types (Boolean, categorical, numerical, see table \ref{table:ch3_characteristics}) the chosen method is required to process different data types. Only the “Gower” technique \citep{DOrazio2016} satisfies this requirement. However, the Gower technique is limited in that matrix rows with missing values do not contribute to the result, therefore, part of the data acquired was discarded before processing.
 
-Table 3.2 shows an example distance matrix, constructed by subsampling the data collected for the Mysql / MariaDB fork (see 4.1 for details). Ten branches and thousand measurement characters were selected at random (the original data set has 107 branches and 56 648 measurement characters).
+Table \ref{table:ch3_example_matrix} shows an example distance matrix, constructed by subsampling the data collected for the Mysql / MariaDB fork (see 4.1 for details). Ten branches and thousand measurement characters were selected at random (the original data set has 107 branches and 56 648 measurement characters).
+
+%-- table ----------
+\input{ch3_example_matrix.tex}
 
 \subsection{Phylogenetic trees and cophenetic distances}
 The proposed methods for answering the research questions involve constructing phylogenetic trees by applying the methods described in 3.1.3.
@@ -134,9 +137,15 @@ Figure \ref{fig:sample_tree} shows an example tree constructed using the subsamp
 
 The next step is to calculate the cophenetic distances between the tips of the trees. Figure 3.2 illustrates this: the green line represents the shortest path between two tips in the example; the red line represents the longest path between two tips.
 
-Table 3.3 shows an example cophenetic matrix. Please note that the cophenetic matrix is calculated from the tree, so the method used to estimate the tree has an effect on the cophenetic matrix. Conversely, the correlation between the distance matrix and the cophenetic matrix can be used as a measure of how accurately the tree represents the distance matrix.
+Table \ref{table:ch3_cophenetic} shows an example cophenetic matrix. Please note that the cophenetic matrix is calculated from the tree, so the method used to estimate the tree has an effect on the cophenetic matrix. Conversely, the correlation between the distance matrix and the cophenetic matrix can be used as a measure of how accurately the tree represents the distance matrix.
 
-The distance matrix can be shaded to show the degree of dissimilarity between releases, and the matrix can then be rearranged into clusters of the same shade. This representation was introduced by \citet{Sneath1962a} and used to discover species and genus in the data. Table 3.4 shows that in the example data, MySQL releases are close to each other, while MySQL 5.7.12 and all releases of MariaDB are the most distant from each other (light-shaded cells in the bottom row).
+% -- table ----------
+\input{ch3_cophenetic.tex}
+
+The distance matrix can be shaded to show the degree of dissimilarity between releases, and the matrix can then be rearranged into clusters of the same shade. This representation was introduced by \citet{Sneath1962a} and used to discover species and genus in the data. Table \ref{table:ch3_shaded_cophenetic} shows that in the example data, MySQL releases are close to each other, while MySQL 5.7.12 and all releases of MariaDB are the most distant from each other (light-shaded cells in the bottom row).
+
+% -- table ----------
+\input{ch3_shaded_cophenetic.tex}
 
 \subsection{Analysis of variance}
 As detailed in 3.2.1, answering RQ1 requires computing a matrix of the cophenetic distances between releases and estimating if these distances correlate to forks and branches. Figure \ref{fig:example_boxplot} shows a box plot of the cophenetic distances in the example data. The plot shows that distances between tips inside either project (“Branches”) are statistically smaller than the distances between tips on different forks (“Forks”).

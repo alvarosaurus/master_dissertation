@@ -59,10 +59,17 @@ oneside,
 \usepackage{graphicx}
 \usepackage{bmpsize}
 \usepackage{tablefootnote}
+\usepackage{makecell} % thead and makecell for wrapping text in tables
+\renewcommand\theadalign{bc}
+\renewcommand\theadfont{\bfseries}
 \usepackage{multirow}
 \usepackage{array}
 \newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
 \usepackage{siunitx} % number format
+\usepackage{soul} % hl highlight color of text
+\definecolor{lgray}{gray}{0.7}
+\definecolor{llgray}{gray}{0.8}
+\definecolor{lllgray}{gray}{0.9}
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
 %----------------------------------------------------------------------------------------
