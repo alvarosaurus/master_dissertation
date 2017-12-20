@@ -19,6 +19,7 @@ prepare:
 	cp -r templates/* temp
 	cp -r docs/* temp
 	mv temp/Chapters/*.tex temp
+	mv temp/Appendices/*.tex temp
 	cp -r figures/* temp
 	cp -r tables/* temp
 
