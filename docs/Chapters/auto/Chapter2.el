@@ -2,6 +2,8 @@
  "Chapter2"
  (lambda ()
    (LaTeX-add-labels
+    "the_practical_problem"
+    "software_metrics"
     "fig:objectives"
     "table:objective1"
     "table:objective2"

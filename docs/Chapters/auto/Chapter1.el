@@ -2,6 +2,8 @@
  "Chapter1"
  (lambda ()
    (LaTeX-add-labels
-    "fig:evolution"))
+    "fig:evolution"
+    "definitions"
+    "aim"))
  :latex)
 

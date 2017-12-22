@@ -11,6 +11,7 @@
     "ch4_rq2_sd"
     "ch4_rq2_anova")
    (LaTeX-add-labels
+    "exporting_recoding"
     "fig:rq1_distributions"
     "fig:rq1_all"
     "fig:rq2_distributions"

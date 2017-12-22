@@ -9,11 +9,12 @@
 \section{Methods and techniques selected}
 In the following sections the term “technique” is used for any procedure that can be boiled down to an algorithm, while the term “method” is used for a coherent combination of techniques.
 
-As illustrated in figure \ref{fig:evolution}, and further elaborated in the working definition of “software evolution” in paragraph 1.3, the methods and techniques chosen are applied to a population of software releases. Therefore, the basic entity under scrutiny, the “operational taxonomic unit” \citep{Sokal1986a}, is the “software release”.
+As illustrated in figure \ref{fig:evolution}, and further elaborated in the working definition of “software evolution” in paragraph \ref{definitions}, the methods and techniques chosen are applied to a population of software releases. Therefore, the basic entity under scrutiny, the “operational taxonomic unit” \citep{Sokal1986a}, is the “software release”.
 
 \subsection{Data acquisition and encoding techniques}
+\label{data_acquisition}
 
-The choice of techniques for data acquisition is based, with alterations, on the overview of software metrics provided by \citet{Nagappan2008a} reviewed in paragraph 2.2.1. \citet{Nagappan2008a} distinguish between code structure characteristics and organizational characteristics. The following characteristics were used to describe software releases.
+The choice of techniques for data acquisition is based, with alterations, on the overview of software metrics provided by \citet{Nagappan2008a} reviewed in paragraph \ref{software_metrics}. \citet{Nagappan2008a} distinguish between code structure characteristics and organizational characteristics. The following characteristics were used to describe software releases.
 
 \subsubsection{Code structure characteristics}
 For the present research, it was assumed that for the study of software evolution, the most relevant code structure characteristic is a measure of code churn, redefined as the amount of change introduced by each release.
@@ -40,12 +41,14 @@ Software source code is generally developed and stored in a code repository. Cod
 \input{ch3_characteristics.tex}
 
 \subsection{Techniques for computing the distance matrix}
+\label{computing_distance_matrix}
+
 As discussed in the review of literature on evolutionary techniques (2.2.3), “distance matrix methods”, i.e. evolutionary techniques that use a matrix of pairwise dissimilarity between entities to estimate a classification \citep{FelsensteinJ.andFelenstein2004a} offer an approach that produces accurate results and performs well on large data sets.
 
-The distance matrix is computed on the base of the measurements obtained using the techniques described in paragraph 3.1.1. The result is a matrix with one column and one row for each software release, were each cell contains a measure of the pairwise dissimilarity between the corresponding two releases. As the measurements used are of different data types (table \ref{table:ch3_characteristics}), a technique that can calculate the distance matrix by combining measurements of mixed data types is required. The Gower distance provided by the R-package “StatMatch” provides such an algorithm \citep{DOrazio2016}.
+The distance matrix is computed on the base of the measurements obtained using the techniques described in paragraph \ref{data_acquisition}. The result is a matrix with one column and one row for each software release, were each cell contains a measure of the pairwise dissimilarity between the corresponding two releases. As the measurements used are of different data types (table \ref{table:ch3_characteristics}), a technique that can calculate the distance matrix by combining measurements of mixed data types is required. The Gower distance provided by the R-package “StatMatch” provides such an algorithm \citep{DOrazio2016}.
 
 \subsection{Estimating the phylogeny of releases}
-Having computed a distance matrix using the techniques described in paragraph 3.1.2, the next step is to estimate a phylogenetic tree that represents the relationships between the software releases studied. The choice of techniques for estimating trees is based on the reference provided by \citet{Paradis2011}, as discussed in 2.2.2. Commonly used techniques for estimating trees include:
+Having computed a distance matrix using the techniques described in paragraph \ref{computing_distance_matrix}, the next step is to estimate a phylogenetic tree that represents the relationships between the software releases studied. The choice of techniques for estimating trees is based on the reference provided by \citet{Paradis2011}, as discussed in 2.2.2. Commonly used techniques for estimating trees include:
 
 \begin{description}
 \dt{Average linkage (UPGMA)} \dd{UPGMA is a method that generates a tree based on the degree of similarity between entities \citep{Sneath1962a}, but does not imply a descent from a common ancestor. Therefore it is a “phenetic” method, i.e. the result is a hierarchical clustering of the entities under scrutiny, based on their characteristics \citep{Rohlf2013a}.}
@@ -82,6 +85,8 @@ These hypotheses can be translated into statistical hypotheses by examining the 
 \definition{Alternative statistical hypothesis}{The alternative statistical hypothesis is that the mean cophenetic distance between a pair of releases is significantly different (p < 0.05) depending on whether the releases are on different forks or on the same branch.}
 
 \subsection{RQ2}
+\label{methodology_rq2}
+
 Research Question 2 sought to determine whether the outcome of a fork can be predicted through phylogenetic methods. The predicted outcome was expected to fall into one of three categories: cooperation, competition or discontinuation. This result would provide guidance as to which outcome is to be expected in the future of the fork and which strategy is more suitable to attain the project's goals. 
 
 The expected outcome was that two distinct but cooperating teams would produce a code base with many similarities, while two competing teams would produce clearly distinct code bases. The proposed method for answering this question is to use the same approach as in RQ1, but applying it to the two data sets obtained from code measurements and team measurements, thus estimating a “code-base tree” and a “team tree” for each fork. 
@@ -111,12 +116,12 @@ The research questions are examined by applying the activities detailed in figur
 \subsection{Data acquisition and re-encoding}
 Data was acquired from selected open source repositories. The choice of software projects to study was guided by the comprehensive review of forks provided by \citet{Robles2012a}. Forks are per definition only possible in an open source context, therefore any conclusions apply in this context only. Additionally, the choice of projects was limited by the availability of a complete release history of the project, at least as far back as the moment in time were the fork happened.
 
-As forking is a process at the crossroads between technical evolution and organizational evolution (as per the definition in paragraph 1.3), the data acquisition techniques were chosen to cover technical and organizational aspects of projects.
+As forking is a process at the crossroads between technical evolution and organizational evolution (as per the definition in paragraph \ref{definitions}), the data acquisition techniques were chosen to cover technical and organizational aspects of projects.
 
-Data has to be re-encoded in order to be processable. This process is explained in detail in paragraph 4.1.2. Guidelines for re-encoding characters can be found in \citet{Sokal1986a}.
+Data has to be re-encoded in order to be processable. This process is explained in detail in paragraph \ref{exporting_recoding}. Guidelines for re-encoding characters can be found in \citet{Sokal1986a}.
 
 \subsection{Distance matrices}
-As explained in paragraph 3.1.2, the chosen methods for answering the research questions are all part of the “distance matrix” family of phylogenetic methods. As shown in figure 3.1, a matrix of the pairwise dissimilarity between the releases of the chosen fork has to be computed. Several techniques are available to compute a distance matrix: computing Euclidean, or “Manhattan” distances are commonly used \citep{Felsenstein1982a}. However, these techniques are limited to processing numerical and Boolean data respectively. As the acquired data is of various data types (Boolean, categorical, numerical, see table \ref{table:ch3_characteristics}) the chosen method is required to process different data types. Only the “Gower” technique \citep{DOrazio2016} satisfies this requirement. However, the Gower technique is limited in that matrix rows with missing values do not contribute to the result, therefore, part of the data acquired was discarded before processing.
+As explained in paragraph \ref{computing_distance_matrix}, the chosen methods for answering the research questions are all part of the “distance matrix” family of phylogenetic methods. As shown in figure 3.1, a matrix of the pairwise dissimilarity between the releases of the chosen fork has to be computed. Several techniques are available to compute a distance matrix: computing Euclidean, or “Manhattan” distances are commonly used \citep{Felsenstein1982a}. However, these techniques are limited to processing numerical and Boolean data respectively. As the acquired data is of various data types (Boolean, categorical, numerical, see table \ref{table:ch3_characteristics}) the chosen method is required to process different data types. Only the “Gower” technique \citep{DOrazio2016} satisfies this requirement. However, the Gower technique is limited in that matrix rows with missing values do not contribute to the result, therefore, part of the data acquired was discarded before processing.
 
 Table \ref{table:ch3_example_matrix} shows an example distance matrix, constructed by subsampling the data collected for the Mysql / MariaDB fork (see 4.1 for details). Ten branches and thousand measurement characters were selected at random (the original data set has 107 branches and 56 648 measurement characters).
 
@@ -159,12 +164,14 @@ As detailed in 3.2.1, answering RQ1 requires computing a matrix of the copheneti
 
 According to \citet{McDonald2014b}, choosing a method for statistical analysis is primarily guided by the kind and number of variables required to test the hypothesis. The cophenetic distance is a measurement variable, and whether the pairwise distance between releases corresponds to a “fork” or “branch” is a nominal variable. \citet{McDonald2014b} lists two methods for testing a hypothesis based on one measurement and one nominal variable: “student's t-test” and “analysis of variance” (ANOVA).
 
-The method proposed for answering RQ2 (paragraph 3.2.2) requires examining projects with different outcomes and computing two cophenetic distance matrices for each project: one for the tree obtained from team measurements, and a second one for the tree obtained from code measurements. Having computed these matrices, the next step is to estimate if these distances correlate with different project outcomes. The cophenetic distance is a measurement variable, the data set used (“team measurements” or “code measurements”) is a nominal variable and the outcome of the project (“cooperation”, “competition” or “discontinuation of a branch”) is a second nominal variable. \citet{McDonald2014b} recommends applying a two-way ANOVA for testing a hypothesis based on one measurement and two nominal variables.
+The method proposed for answering RQ2 (paragraph \ref{methodology_rq2}) requires examining projects with different outcomes and computing two cophenetic distance matrices for each project: one for the tree obtained from team measurements, and a second one for the tree obtained from code measurements. Having computed these matrices, the next step is to estimate if these distances correlate with different project outcomes. The cophenetic distance is a measurement variable, the data set used (“team measurements” or “code measurements”) is a nominal variable and the outcome of the project (“cooperation”, “competition” or “discontinuation of a branch”) is a second nominal variable. \citet{McDonald2014b} recommends applying a two-way ANOVA for testing a hypothesis based on one measurement and two nominal variables.
 
 Consequently, RQ1 and RQ2 can be answered by applying analysis of variance (ANOVA), albeit with different number of nominal variables. ANOVA assumes that the data is normally distributed (fits the Gaussian “bell curve”) and that that the standard deviation is the same for the data sets examined, otherwise false positives may result \citep[p.147]{McDonald2014b}. As the raw data obtained from the repositories did not meet these assumptions, the data had to be transformed to fit the assumptions prior to the analysis.
 
 %----------------------------------------------------------------------------------------
 \section{Ethical considerations}
+\label{ethical_considerations}
+
 All data analysed for this research is freely available under an open source license, therefore no intellectual property rights were disregarded during the acquisition of the data. 
 
 Some of the forks studied were a consequence of disagreements between development teams. Care was applied during the analysis not to take sides for any particular team; however, to thwart any bias ensuing from the reputation of well-known actors in the industry, all names of developers were anonymized prior to being stored locally.

@@ -65,7 +65,7 @@ Development of the OpenOffice suite of office applications began in 2000, in a c
 \subsection{Data acquisition}
 In order to make the data easier to process, a database was populated with data obtained from the projects' repositories (\ref{AppendixA}). A script was written in Python to collect the data from the software repositories, and a second script to compute the metrics. The scripts were written applying test-driven-development to ensure their correctness and maintainability. Data collection was automated, so the process is repeatable.
 
-Team members were identified by their login name, publicly available through the repositories’ logs. Login names were replaced by non-reversible unique hashes prior to being stored in a local database (in line with ethical considerations in paragraph 3.4).
+Team members were identified by their login name, publicly available through the repositories’ logs. Login names were replaced by non-reversible unique hashes prior to being stored in a local database (in line with ethical considerations in paragraph \ref{ethical_considerations}).
 
 The raw data as obtained from the repositories and stored in the local database is summarized in table \ref{table:ch4_rawdata}.
 
@@ -73,6 +73,8 @@ The raw data as obtained from the repositories and stored in the local database 
 \input{ch4_rawdata.tex}
 
 \subsection{Exporting and recoding the data for analysis}
+\label{exporting_recoding}
+
 The measurements obtained from the data were exported in a format suitable for analysis: a spreadsheet where columns represent releases and rows represent measured characteristics.
 
 \begin{itemize}
@@ -85,7 +87,7 @@ A Python script was written to export the data. The script handles re-encoding a
 Binary characters, e.g. presence/absence of a file in a branch, were encoded as a row of Boolean values. Count characters were encoded as integers. Measurement characters, e.g. checksums of files, were recoded into classes: if a file is the same for all branches, there was only one class, if a file changes in all branches, there were as many classes as branches and so on (see table 3.1 for an overview of the data types used).
 
 \subsubsection{Cleaning-up}
-The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table \ref{ch4_cleanup}).
+The data had to be cleaned-up before processing: only rows which are complete could be used for calculating the distance matrix, e.g. if a file is missing in a release, its corresponding “checksum” row had to be discarded. Cleaned-up data represents between 53 and 64 \% of the raw data, depending on the fork (table \ref{table:ch4_cleanup}).
 
 %-- table ----------
 \input{ch4_cleanup.tex}
@@ -111,7 +113,7 @@ Answering the research questions involves calculating a cophenetic distance matr
 \section{Data analysis}
 
 \subsection{Answering RQ1}
-Answering RQ1 (see paragraph 2.1) requires calculating the distance between software releases and estimating if these distances correlate to forks and branches. The expected outcome is that forks will always differ more than branches, independently of the outcome of the project.
+Answering RQ1 (see paragraph \ref{the_practical_problem}) requires calculating the distance between software releases and estimating if these distances correlate to forks and branches. The expected outcome is that forks will always differ more than branches, independently of the outcome of the project.
 
 \subsubsection{Choice of statistical method for analysis}
 Whether a pair of releases represents a fork or a branch is a nominal variable with two possible values (“fork” or “branch”) and the pairwise cophenetic distance between releases is a measurement variable. A suitable test for these types of variables is a one-way analysis of variance (ANOVA) with two categories \citep{McDonald2014b}. The result should be repeatable for each case described in 4.1. The R-package “Stats” provides methods for computing variance \citep[p.1211]{RDevelopmentCoreTeam2008a}.
@@ -138,7 +140,7 @@ As can be seen in figure \ref{fig:rq1_distributions}, the data is not normally d
   \label{fig:rq1_distributions}
 \end{figure}
 
-\definition{Assumption 3: Homoscedasticity}{ANOVA assumes that the standard deviation of the data is the same for the data sets considered (the data is “homoscedastic” or else it is “heteroscedastic”). Performing an ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.147]{McDonald2014b}.} Table \ref{ch4_rq1_sd.tex} shows that the cophenetic distances obtained by applying the NJ method to the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of branches and forks is relatively small (0,0020998 /  0,0018566 = 1,1309758). Therefore, performing an ANOVA on the square root transformed data should minimize the chance of false positives.
+\definition{Assumption 3: Homoscedasticity}{ANOVA assumes that the standard deviation of the data is the same for the data sets considered (the data is “homoscedastic” or else it is “heteroscedastic”). Performing an ANOVA on heteroscedastic data sets increases the chance of false positives \citep[p.147]{McDonald2014b}.} Table \ref{table:ch4_rq1_sd} shows that the cophenetic distances obtained by applying the NJ method to the square root transformed data set is homoscedastic within reason, i.e. the ratio between the standard deviation of branches and forks is relatively small (0,0020998 /  0,0018566 = 1,1309758). Therefore, performing an ANOVA on the square root transformed data should minimize the chance of false positives.
 
 %-- table ----------
 \input{ch4_rq1_sd.tex}
@@ -172,9 +174,9 @@ This result is visualised in the plot in figure \ref{fig:rq1_all}: The mean coph
 \end{figure}
 
 \subsection{Answering RQ2}
-Answering RQ2 (see paragraph 2.1) requires examining the phylogenetic trees of forks with different outcomes (competition, cooperation, discontinuation of a branch) and seeking a correlation between the outcome of the fork and the topology of the tree.
+Answering RQ2 (see paragraph \ref{the_practical_problem}) requires examining the phylogenetic trees of forks with different outcomes (competition, cooperation, discontinuation of a branch) and seeking a correlation between the outcome of the fork and the topology of the tree.
 
-The proposed method for answering this question is to use the same approach as in RQ1, but applying it to the two data sets obtained from code measurements and team measurements, thus estimating a “code-base tree” and a “team tree” for each fork. As explained in paragraph 3.2.2, the rationale for this approach is that two distinct but cooperating teams are expected to produce a code base with many similarities, while two competing teams will produce clearly distinct code bases. Therefore answering RQ2 required treating organizational and code measurements separately. Furthermore, as different organizations and code bases were compared, measurements representing the pairwise differences between releases within the same organization, i.e. “branches”, were discarded, and only “fork” measurements were analysed.
+The proposed method for answering this question is to use the same approach as in RQ1, but applying it to the two data sets obtained from code measurements and team measurements, thus estimating a “code-base tree” and a “team tree” for each fork. As explained in paragraph \ref{methodology_rq2}, the rationale for this approach is that two distinct but cooperating teams are expected to produce a code base with many similarities, while two competing teams will produce clearly distinct code bases. Therefore answering RQ2 required treating organizational and code measurements separately. Furthermore, as different organizations and code bases were compared, measurements representing the pairwise differences between releases within the same organization, i.e. “branches”, were discarded, and only “fork” measurements were analysed.
 
 \subsubsection{Choice of statistical method for analysis}
 The outcome of a fork is a nominal variable with three categories (“competition”, “cooperation”, “discontinuation”), the data-set used to construct the tree is a second nominal variable with two categories (“code” and “team”) and the cophenetic distance between releases on different forks is a measurement variable. The null hypothesis for RQ2 is that the mean cophenetic distance is not significantly different for the “outcome” categories considered. Rejecting the null hypothesis would provide evidence that the outcome of a fork can be predicted. A suitable test for this case is a two-way ANOVA \citep{McDonald2014b}, where the measurement variable is the cophenetic distance between releases on different forks, and the two nominal variables are the outcome and the data-set used.
