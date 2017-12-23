@@ -63,7 +63,7 @@ Development of the OpenOffice suite of office applications began in 2000, in a c
 \end{description}
 
 \subsection{Data acquisition}
-In order to make the data easier to process, a database was populated with data obtained from the projects' repositories (\ref{AppendixA}). A script was written in Python to collect the data from the software repositories, and a second script to compute the metrics. The scripts were written applying test-driven-development to ensure their correctness and maintainability. Data collection was automated, so the process is repeatable.
+In order to make the data easier to process, a database was populated with data obtained from the projects' repositories (Appendix \ref{AppendixA}). A script was written in Python to collect the data from the software repositories, and a second script to compute the metrics. The scripts were written applying test-driven-development to ensure their correctness and maintainability. Data collection was automated, so the process is repeatable.
 
 Team members were identified by their login name, publicly available through the repositories’ logs. Login names were replaced by non-reversible unique hashes prior to being stored in a local database (in line with ethical considerations in paragraph \ref{ethical_considerations}).
 
@@ -95,7 +95,7 @@ The data had to be cleaned-up before processing: only rows which are complete co
 \subsection{Applying phylogenetic methods}
 Distance matrices were computed and phylogenetic trees were estimated for each fork case studied. The software was written using the R language for statistical computing \citep{RDevelopmentCoreTeam2008a}. The classes implemented are wrappers for the R functions provided by packages for general and biological statistics. 
 
-The software implemented for the research is documented in the class diagram in \ref{AppendixB}.
+The software implemented for the research is documented in the class diagram in Appendix \ref{AppendixB}.
 
 \begin{itemize}
 \item{Distance matrices were calculated using the function “gower” provided by the R-package “StatMatch” \citep{DOrazio2016}.}
