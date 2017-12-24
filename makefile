@@ -3,7 +3,10 @@ default: all
 
 # the name of the article file (without extension)
 ARTICLE = master
+# the name of the extended abstract file (without extension)
+ABSTRACT = ext_abstract
 
+# build the thesis and save it to docs/master.pdf
 all: prepare
 	cd temp && \
 	pdflatex $(ARTICLE).tex && \
@@ -12,6 +15,16 @@ all: prepare
 	pdflatex $(ARTICLE).tex
 	mv -f temp/$(ARTICLE).pdf docs
 	echo created docs/$(ARTICLE).pdf 
+
+# build the extended abstract and save it to docs/ext_abstract.pdf
+abstract: prepare
+	cd temp && \
+	pdflatex $(ABSTRACT).tex && \
+	bibtex $(ABSTRACT) && \
+	pdflatex $(ABSTRACT) && \
+	pdflatex $(ABSTRACT).tex
+	mv -f temp/$(ABSTRACT).pdf docs
+	echo created docs/$(ABSTRACT).pdf 
 
 # copy all files required by latex to the temp dir
 prepare: 
