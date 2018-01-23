@@ -1,6 +1,6 @@
 # Evaluating phylogenetic methods for quantifying risks and opportunities presented by forks in open source software
 
-![https://zenodo.org/record/1158292](https://zenodo.org/badge/DOI/10.5281/zenodo.1158292.svg)
+<a href=https://zenodo.org/record/1158292><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1158292.svg"/></a>
 
 These are the source LaTeX files for my master in software engineering, which I uploaded here under an [Creative Commons Attribution-ShareAlike license (CC BY-SA 4.0)](http://creativecommons.org/licenses/by-sa/4.0/) license, as a question of [reproducible research](https://cos.io/our-services/top-guidelines/) and because the dissertation delves into open source development.
 
